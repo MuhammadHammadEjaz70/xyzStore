@@ -12,7 +12,7 @@ function App() {
       <div>
         <TopMenu />
         <Routes>
-          <Route path="/" exact element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/not-found" element={<NotFound />} />
