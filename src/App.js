@@ -16,7 +16,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/not-found" element={<NotFound />} />
-          <Navigate to="not-found" />
+          {/* <Navigate to="not-found" /> */}
         </Routes>
       </div>
     </BrowserRouter>
