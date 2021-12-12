@@ -12,10 +12,10 @@ function App() {
       <div>
         <TopMenu />
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route exact path="/" element={<LandingPage />} />
           <Route path="/products" element={<Products />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/not-found" element={<NotFound />} />
+          {/* <Route exact path="/not-found" element={<NotFound />} /> */}
           {/* <Navigate to="not-found" /> */}
         </Routes>
       </div>
