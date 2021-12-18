@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 // import Button from '@mui/material/Button';
 import { makeStyles } from "@mui/styles";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+
 const useStyles = makeStyles({
   link: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -39,6 +40,22 @@ const TopMenu = () => {
         <Typography variant="h6">
           <Link className={classes.link} to="/contactus">
             Contact Us
+          </Link>
+        </Typography>
+
+        <Typography variant="h6">
+          <Link className={classes.link} to="/login">
+            Login
+          </Link>
+        </Typography>
+        <Typography variant="h6">
+          <Link className={classes.link} to="/register">
+            Register
+          </Link>
+        </Typography>
+        <Typography variant="h6">
+          <Link className={classes.link} to="/ ">
+            <Button style={{ padding: "10px" }}>LogOut</Button>
           </Link>
         </Typography>
       </Toolbar>

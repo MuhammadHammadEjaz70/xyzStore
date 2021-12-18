@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://usman-recipes.herokuapp.com/api/products";
+axios.defaults.baseURL = "https://usman-recipes.herokuapp.com/api/";
 class GenericSerivce {
   constructor() {}
   get = (url) => {
