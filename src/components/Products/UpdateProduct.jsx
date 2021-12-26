@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const UpdateProduct = (props) => {
   const navigate = useNavigate();
   const params = useParams();
@@ -67,7 +68,7 @@ const UpdateProduct = (props) => {
           onClick={(e) => {
             console.log("Update  call");
             axios
-              .put("https://usman-recipes.herokuapp.com/api/products/" + id, {
+              .put("http://localhost:4000/api/products/" + id, {
                 name,
                 price,
               })

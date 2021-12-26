@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, TextField } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 import axiosInstance from "../../services/axiosInstance";
+import userService from "../../services/UserService";
+import { toast } from "react-toastify";
 const useStyles = makeStyles({
   contianer: {
     display: "flex",
@@ -18,10 +20,10 @@ const useStyles = makeStyles({
   },
 });
 const Login = (props) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const classes = useStyles();
-  const [email, setEmail] = useState("hammad@gmail.com");
-  const [password, setPassword] = useState("hammad");
+  const [email, setEmail] = useState("hammadgujjar1@admin.com");
+  const [password, setPassword] = useState("admin");
   return (
     <div className={classes.contianer}>
       <div className={classes.child}>
@@ -49,18 +51,17 @@ const Login = (props) => {
           variant="contained"
           color="primary"
           onClick={(e) => {
-            axiosInstance
-              .post("https://usman-recipes.herokuapp.com/api/auth", {
-                email,
-                password,
-              })
-              .then((res) => {
-                console.log(res.data);
-                localStorage.setItem("jwt_access_token", res.data);
-                window.location.replace("/ ");
+            userService
+              .login(email, password)
+              .then((data) => {
+                console.log(data);
+                window.location.href = "/";
               })
               .catch((e) => {
                 console.log(e);
+                toast.error(e.response.data, {
+                  position: toast.POSITION.TOP_LEFT,
+                });
               });
           }}
         >

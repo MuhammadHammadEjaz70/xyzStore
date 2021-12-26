@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { Button, TextField } from "@mui/material";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 import axiosInstance from "../../services/axiosInstance";
+import userService from "../../services/UserService";
+import axios from "axios";
+import { toast } from "react-toastify";
 const useStyles = makeStyles({
   contianer: {
     display: "flex",
@@ -17,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 const Register = (props) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("hammad@gmail.com");
   const [password, setPassword] = useState("hammad");
   const [name, setName] = useState("Hammad");
@@ -59,19 +62,17 @@ const Register = (props) => {
           variant="contained"
           color="primary"
           onClick={(e) => {
-            axiosInstance
-              .post("https://usman-recipes.herokuapp.com/api/users", {
-                email,
-                password,
-                name,
+            userService
+              .register(name, email, password)
+              .then((data) => {
+                console.log(data);
+                navigate("/login");
               })
-              .then((res) => {
-                console.log(res.data);
-                localStorage.setItem("jwt_access_token", res.data);
-                window.location.replace("/login");
-              })
-              .catch((e) => {
-                console.log(e);
+              .catch((err) => {
+                console.log(err);
+                toast.error(err.response.data, {
+                  position: toast.POSITION.TOP_LEFT,
+                });
               });
           }}
         >

@@ -6,6 +6,8 @@ import AddIcon from "@mui/icons-material/Add";
 import SingleProduct from "./SingleProduct";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import productsService from "../../services/ProductsService";
+import userService from "../../services/UserService";
 
 const useStyles = makeStyles({
   addBtn: {
@@ -16,9 +18,11 @@ const useStyles = makeStyles({
 const Prodcuts = (props) => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+
   const getData = () => {
     axios
-      .get("https://usman-recipes.herokuapp.com/api/products")
+      .get("http://localhost:4000/api/products")
+
       .then((res) => {
         setProducts(res.data);
       })
@@ -29,24 +33,28 @@ const Prodcuts = (props) => {
 
   const classes = useStyles();
   // getData();
+
   React.useEffect(getData, []);
   //   console.log("Inside  Products Components");
   const handleNewProductClick = () => {
     console.log(props);
     navigate("/product/new");
   };
+
   return (
     <div>
       <h1>Products</h1>
-      <Fab
-        color="primary"
-        aria-label="add"
-        className={classes.addBtn}
-        onClick={handleNewProductClick}
-      >
-        {" "}
-        <AddIcon />
-      </Fab>
+      {userService.isLoggedIn() && (
+        <Fab
+          color="primary"
+          aria-label="add"
+          className={classes.addBtn}
+          onClick={handleNewProductClick}
+        >
+          <AddIcon />
+        </Fab>
+      )}
+
       {products.length === 0 ? (
         <p>There are no proucts</p>
       ) : (

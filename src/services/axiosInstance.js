@@ -17,12 +17,12 @@ axiosInstance.defaults.headers.post["Content-Type"] = "application/json";
 //   response => successHandler(response),
 //   error => errorHandler(error)
 // );
-const errorHandler = (error) => {
-  return Promise.reject({ ...error });
-};
+// const errorHandler = (error) => {
+//   return Promise.reject({ ...error });
+// };
 
-const successHandler = (response) => {
-  return response;
-};
+// const successHandler = (response) => {
+//   return response;
+// };
 
 export default axiosInstance;

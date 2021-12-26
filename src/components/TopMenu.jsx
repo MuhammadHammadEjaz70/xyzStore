@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import Button from '@mui/material/Button';
 import { makeStyles } from "@mui/styles";
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import userService from "../services/UserService";
 
 const useStyles = makeStyles({
   link: {
@@ -32,32 +33,40 @@ const TopMenu = () => {
             Products
           </Link>
         </Typography>
-        <Typography variant="h6">
-          <Link className={classes.link} to="/product/new">
-            Add New Product
-          </Link>
-        </Typography>
+
         <Typography variant="h6">
           <Link className={classes.link} to="/contactus">
             Contact Us
           </Link>
         </Typography>
-
-        <Typography variant="h6">
-          <Link className={classes.link} to="/login">
-            Login
-          </Link>
-        </Typography>
-        <Typography variant="h6">
-          <Link className={classes.link} to="/register">
-            Register
-          </Link>
-        </Typography>
-        <Typography variant="h6">
-          <Link className={classes.link} to="/ ">
-            <Button style={{ padding: "10px" }}>LogOut</Button>
-          </Link>
-        </Typography>
+        {!userService.isLoggedIn() ? (
+          <>
+            <Typography variant="h6">
+              <Link className={classes.link} to="/login">
+                Login
+              </Link>
+            </Typography>
+            <Typography variant="h6">
+              <Link className={classes.link} to="/register">
+                Register
+              </Link>
+            </Typography>
+          </>
+        ) : (
+          <Typography variant="h6">
+            <Link className={classes.link} to="/ ">
+              <Button
+                style={{ padding: "10px" }}
+                onClick={(e) => {
+                  userService.logout();
+                  window.location.reload();
+                }}
+              >
+                LogOut {userService.getLoggedInUser().name}
+              </Button>
+            </Link>
+          </Typography>
+        )}
       </Toolbar>
     </AppBar>
   );

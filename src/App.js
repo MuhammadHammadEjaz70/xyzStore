@@ -10,17 +10,21 @@ import NewProducut from "./components/Products/NewProduct";
 import UpdateProduct from "./components/Products/UpdateProduct";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   // const navigate = useNavigate();
   return (
     <BrowserRouter>
       <div>
+        <ToastContainer />
         <TopMenu />
         <div style={{ padding: "30px" }}>
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/travel" element={<Products />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/product/new" element={<NewProducut />} />
@@ -29,7 +33,7 @@ function App() {
             <Route path="/not-found" element={<NotFound />} />
 
             {/* <Navigate to="not-found" /> */}
-          </Routes>{" "}
+          </Routes>
         </div>
       </div>
     </BrowserRouter>

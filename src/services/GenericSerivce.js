@@ -1,8 +1,9 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://usman-recipes.herokuapp.com/api/";
-class GenericSerivce {
+axios.defaults.baseURL = "http://localhost:4000/api/";
+axios.defaults.headers.common["x-auth-token"] = localStorage.getItem("token");
+class GenericService {
   constructor() {}
-  get = (url) => {
+  get = (url) =>
     new Promise((resolve, reject) => {
       axios
         .get(url)
@@ -13,8 +14,7 @@ class GenericSerivce {
           reject(err);
         });
     });
-  };
-  post = (url, data) => {
+  post = (url, data) =>
     new Promise((resolve, reject) => {
       axios
         .post(url, data)
@@ -25,8 +25,7 @@ class GenericSerivce {
           reject(err);
         });
     });
-  };
-  delete = (url) => {
+  delete = (url) =>
     new Promise((resolve, reject) => {
       axios
         .delete(url)
@@ -37,8 +36,7 @@ class GenericSerivce {
           reject(err);
         });
     });
-  };
-  put = (url, data) => {
+  put = (url, data) =>
     new Promise((resolve, reject) => {
       axios
         .put(url, data)
@@ -49,6 +47,5 @@ class GenericSerivce {
           reject(err);
         });
     });
-  };
 }
-export default GenericSerivce;
+export default GenericService;

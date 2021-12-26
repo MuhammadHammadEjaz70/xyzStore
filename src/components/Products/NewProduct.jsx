@@ -1,12 +1,12 @@
-import { Grid } from "@material-ui/core";
-import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
+import { Grid, TextField, Button } from "@material-ui/core";
 import axios from "axios";
+import productService from "./../../services/ProductsService";
 import { useNavigate } from "react-router-dom";
-const NewProducut = (props) => {
+const NewProduct = (props) => {
+  const [name, setName] = React.useState("");
+  const [price, setPrice] = React.useState(0);
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -15,10 +15,7 @@ const NewProducut = (props) => {
       <Grid item xs={3}></Grid>
       <Grid item xs={6}>
         <TextField
-          style={{ padding: "10px" }}
-          id="standard-basic"
           label="name"
-          variant="standard"
           fullWidth
           value={name}
           onChange={(e) => {
@@ -26,16 +23,11 @@ const NewProducut = (props) => {
           }}
         />
         <TextField
-          style={{ padding: "10px" }}
-          id="standard-basic"
           label="price"
-          variant="standard"
           fullWidth
           value={price}
           onChange={(e) => {
-            setPrice(
-              e.target.value
-            ); /* Using react state we can change the value of input fields*/
+            setPrice(e.target.value);
           }}
         />
       </Grid>
@@ -46,14 +38,10 @@ const NewProducut = (props) => {
           variant="contained"
           color="primary"
           onClick={(e) => {
-            console.log("Send API call");
-            axios
-              .post("https://usman-recipes.herokuapp.com/api/products", {
-                name,
-                price,
-              })
-              .then((res) => {
-                console.log(res.data);
+            productService
+              .addProduct({ name, price })
+              .then((data) => {
+                console.log(data);
                 navigate("/products");
               })
               .catch((err) => {
@@ -61,10 +49,11 @@ const NewProducut = (props) => {
               });
           }}
         >
-          Add new Product
+          Add New
         </Button>
       </Grid>
     </Grid>
   );
 };
-export default NewProducut;
+
+export default NewProduct;
