@@ -44,11 +44,12 @@ const SingleProduct = (props) => {
               variant="contained"
               color="secondary"
               onClick={(e) => {
-                productsService
-                  .deleteProduct(product._id)
-                  .then((data) => {
-                    console.log(data);
-                    onDelete();
+                axios
+                  .delete("https://localhost:4000/api/products/" + product._id)
+                  .then((res) => {
+                    console.log(res.data);
+                    //   setSending(false);
+                    navigate("/products");
                   })
                   .catch((err) => {
                     console.log(err);

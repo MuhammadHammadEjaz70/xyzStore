@@ -38,10 +38,11 @@ const NewProduct = (props) => {
           variant="contained"
           color="primary"
           onClick={(e) => {
-            productService
-              .addProduct({ name, price })
-              .then((data) => {
-                console.log(data);
+            axios
+              .post("https://localhost:4000/api/products", { name, price })
+              .then((res) => {
+                console.log(res.data);
+                //   setSending(false);
                 navigate("/products");
               })
               .catch((err) => {
